@@ -12,6 +12,7 @@ class Account(models.Model):
     )
 
     user = models.ForeignKey(User, on_delete=models.DO_NOTHING)
+    name = models.CharField(max_length=128, null=True, blank=True)
     thumbnail = models.FileField(upload_to="images", null=True, blank=True)
     address = models.CharField(max_length=512, null=True, blank=True)
     phone_number = models.CharField(max_length=11, null=True, blank=True)
@@ -24,6 +25,9 @@ class Account(models.Model):
     id_card = models.FileField(upload_to="images", null=True, blank=True)
     license_image = models.FileField(upload_to="images", null=True, blank=True)
     isAuthenticated = models.BooleanField(default=False)
+
+    def __str__(self):
+        return self.user.username
 
 
 class Bar(models.Model):
