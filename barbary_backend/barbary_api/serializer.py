@@ -12,20 +12,19 @@ class AddBarSerializer(serializers.Serializer):
     date = serializers.DateField()
     weight = serializers.FloatField()
     product_type = serializers.CharField(max_length=256)
-    product_packaging = serializers.CharField(max_length=256)
+    # product_packaging = serializers.CharField(max_length=256)
     fleet_type = serializers.CharField(max_length=256)
     description = serializers.CharField(max_length=512, allow_blank=True, allow_null=True)
 
 
 class UpdateBarSerializer(serializers.Serializer):
-    BarId = serializers.IntegerField()
+    barId = serializers.IntegerField()
     beginning = serializers.CharField(max_length=256)
     destination = serializers.CharField(max_length=256)
     price = serializers.CharField(max_length=256)
     date = serializers.DateField()
     weight = serializers.FloatField()
     product_type = serializers.CharField(max_length=256)
-    product_packaging = serializers.CharField(max_length=256)
     fleet_type = serializers.CharField(max_length=256)
     description = serializers.CharField(max_length=512, allow_blank=True, allow_null=True)
 
@@ -37,3 +36,7 @@ class RegisterSerializer(serializers.Serializer):
 
 class BarIdSerializer(serializers.Serializer):
     barId = serializers.IntegerField()
+
+
+class SubmitPositionSerializer(serializers.Serializer):
+    position = serializers.ChoiceField(choices=['driver', 'manager'])

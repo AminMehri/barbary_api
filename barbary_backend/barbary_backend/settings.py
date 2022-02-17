@@ -25,7 +25,13 @@ SECRET_KEY = 'django-insecure-=(ev8u2k&_@vwtszintejd@!886+jnbk3#f#5fg^mog05ik1ub
 # SECURITY WARNING: don't run with debug turned on in production!
 DEBUG = True
 
-ALLOWED_HOSTS = []
+ALLOWED_HOSTS = [
+    # 'https://www.bar.iran.liara.run',
+    # 'https://bar.iran.liara.run',
+    # 'https://www.bar-api.iran.liara.run',
+    # 'https://bar-api.iran.liara.run',
+    # 'http://127.0.0.1:8000'
+]
 
 
 # Application definition
@@ -40,7 +46,7 @@ INSTALLED_APPS = [
     'barbary_api',
     'rest_framework',
     'rest_framework_simplejwt',
-    "corsheaders",
+    'corsheaders',
 ]
 
 MIDDLEWARE = [
@@ -61,7 +67,7 @@ REST_FRAMEWORK = {
 }
 
 SIMPLE_JWT = {
-    'ACCESS_TOKEN_LIFETIME': timedelta(minutes=240),
+    'ACCESS_TOKEN_LIFETIME': timedelta(minutes=2400),
     'REFRESH_TOKEN_LIFETIME': timedelta(days=1),
     'ROTATE_REFRESH_TOKENS': False,
     'BLACKLIST_AFTER_ROTATION': False,
@@ -144,7 +150,10 @@ AUTH_PASSWORD_VALIDATORS = [
 
 CORS_ALLOWED_ORIGINS = [
     "http://192.168.1.105:8080",
-    'http://192.168.43.89:8080'
+    "http://192.168.43.89:8080",
+    "http://192.168.1.130:8080",
+    # 'https://bar.iran.liara.run',
+    # 'https://www.bar.iran.liara.run',
 ]
 
 
@@ -153,7 +162,7 @@ CORS_ALLOWED_ORIGINS = [
 
 LANGUAGE_CODE = 'en-us'
 
-TIME_ZONE = 'UTC'
+TIME_ZONE = 'Asia/Tehran'
 
 USE_I18N = True
 
