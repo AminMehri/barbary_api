@@ -29,10 +29,14 @@ class UpdateBarSerializer(serializers.Serializer):
     description = serializers.CharField(max_length=512, allow_blank=True, allow_null=True)
 
 
-class RegisterSerializer(serializers.Serializer):
+class OTPSerializer(serializers.Serializer):
     phone_number = serializers.CharField(max_length=11, min_length=11, allow_null=False, allow_blank=False,
                                          validators=[RegexValidator(r'^[1,2,3,4,5,6,7,8,9,0]{11}$')])
 
+
+class RegisterSerializer(serializers.Serializer):
+    phone_number = serializers.CharField(allow_null=False, allow_blank=False, validators=[RegexValidator(r'^[1,2,3,4,5,6,7,8,9,0]{11}$')])
+    OTP = serializers.CharField(allow_null=False, allow_blank=False, validators=[RegexValidator(r'^[1,2,3,4,5,6,7,8,9,0]{4}$')])
 
 class BarIdSerializer(serializers.Serializer):
     barId = serializers.IntegerField()

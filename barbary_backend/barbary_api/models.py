@@ -18,8 +18,11 @@ class Account(models.Model):
         ('company', 'company'),
     )
 
-    user = models.ForeignKey(User, on_delete=models.DO_NOTHING)
+    user = models.ForeignKey(User, on_delete=models.CASCADE)
     name = models.CharField(max_length=128, null=True, blank=True)
+    lastOTP = models.CharField(max_length=4, blank=True, null=False)
+    lastOtpTimeSet = jmodels.jDateTimeField(blank=True, null=True)
+    first_time = models.BooleanField(default=True)
     position = models.CharField(max_length=7, choices=POSITION_CHOICES, null=True, blank=True)
     thumbnail = models.FileField(upload_to="images", null=True, blank=True)
     address = models.CharField(max_length=512, null=True, blank=True)
@@ -31,6 +34,7 @@ class Account(models.Model):
     id_card = models.FileField(upload_to="images", null=True, blank=True)
     license_image = models.FileField(upload_to="images", null=True, blank=True)
     isAuthenticated = models.BooleanField(default=False)
+    isSeeLastNotif = models.BooleanField(default=False)
 
     def __str__(self):
         return self.user.username
@@ -44,7 +48,6 @@ class Bar(models.Model):
     date = jmodels.jDateField()
     weight = models.FloatField()
     product_type = models.CharField(max_length=256)
-    # product_packaging = models.CharField(max_length=256)
     fleet_type = models.CharField(max_length=256)
     owner_bar = models.ForeignKey(Account, on_delete=models.DO_NOTHING)
     description = models.CharField(max_length=512, blank=True, default='')
@@ -53,16 +56,24 @@ class Bar(models.Model):
     driver = models.ForeignKey(Account, blank=True, null=True, on_delete=models.SET_NULL, related_name="driver")
     isSpecial = models.BooleanField(default=False)
     isTopShow = models.BooleanField(default=False)
+    # isDeleted = models.BooleanField(default=False)
 
     def __str__(self):
         return self.beginning + ' ---> ' + self.destination
 
 
 class Notification(models.Model):
-
+    COLOR_CHOISES = (
+        ('warning', 'warning'),
+        ('success', 'success'),
+        ('danger', 'danger'),
+        ('info', 'info'),
+    )
     title = models.CharField(max_length=128)
     description = models.TextField()
-    publish = models.DateTimeField(default=timezone.now)
+    date = jmodels.jDateTimeField(auto_now=True)
+    color = models.CharField(max_length=8, choices=COLOR_CHOISES, default='warning')
+    immortal = models.BooleanField(default=False)
 
     def __str__(self):
         return self.title

@@ -152,6 +152,7 @@ CORS_ALLOWED_ORIGINS = [
     "http://192.168.1.105:8080",
     "http://192.168.43.89:8080",
     "http://192.168.1.130:8080",
+    'http://172.20.10.2:8080',
     # 'https://bar.iran.liara.run',
     # 'https://www.bar.iran.liara.run',
 ]
